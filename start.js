@@ -1,9 +1,20 @@
-const server = require('./server');
+const { server, app } = require('./server');
+const slackClient = require('./server/slackClient');
+
+const slackToken = process.env.SLACK_API_TOKEN_IRIS || '';
+const slackLogLevel = 'verbose';
+
+const rtm = slackClient.init(slackToken, slackLogLevel);
+rtm.start();
 
 // this if statement will prevent our express server and test server
 // (using supertest) from trying to access the same port at the same time
 if (!module.parent) {
-  server.listen(process.env.PORT || 2020, () => console.log('Listening on port 2020'));
+  slackClient.addAuthentiatedHandler(rtm, () => {
+    // wait to connect to server until slack is connected
+    server.listen(process.env.PORT || 2020);
+  })
+  server.on('listening', () => console.log(`Listening on port ${server.address().port} in ${app.get('env')} mode`))
 }
 
 module.exports = server;

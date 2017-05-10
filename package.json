@@ -12,10 +12,14 @@
     "eslint-plugin-import": "^2.2.0"
   },
   "dependencies": {
+    "@slack/client": "^3.9.0",
     "concurrently": "^3.4.0",
+    "dotenv": "^4.0.0",
     "electron": "^1.6.2",
     "express": "^4.15.2",
+    "ngrok": "^2.2.8",
     "nodemon": "^1.11.0",
+    "request": "^2.81.0",
     "skellington": "^1.2.0",
     "skellington-logger": "^1.1.0",
     "socket.io": "^2.0.1",
@@ -24,6 +28,7 @@
   "main": "app/main.js",
   "scripts": {
     "build-osx": "electron-packager . Example --platform=darwin --arch=x64 --version=0.36.0 --icon=Icon.icns",
-    "start": "concurrently -k 'node_modules/.bin/nodemon start.js' 'node_modules/.bin/electron .'"
+    "electron": "node_modules/.bin/electron .",
+    "start": "node start.js"
   }
 }
