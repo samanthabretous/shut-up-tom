@@ -1,4 +1,5 @@
-const { server, app } = require('./server');
+const app = require('./server');
+const http = require('http');
 const slackClient = require('./server/slackClient');
 
 const witToken = process.env.WIT_TOKEN || '';
@@ -7,9 +8,11 @@ const witClient = require('./server/witClient')(witToken);
 const slackToken = process.env.SLACK_API_TOKEN_IRIS || '';
 const slackLogLevel = 'verbose';
 
-const rtm = slackClient.init(slackToken, slackLogLevel, witClient);
+const serviceRegistry = app.get('serviceRegistry');
+const rtm = slackClient.init(slackToken, slackLogLevel, witClient, serviceRegistry);
 rtm.start();
 
+const server = http.createServer(app);
 // this if statement will prevent our express server and test server
 // (using supertest) from trying to access the same port at the same time
 if (!module.parent) {
