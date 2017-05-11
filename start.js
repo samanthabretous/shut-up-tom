@@ -1,10 +1,13 @@
 const { server, app } = require('./server');
 const slackClient = require('./server/slackClient');
 
+const witToken = process.env.WIT_TOKEN || '';
+const witClient = require('./server/witClient')(witToken);
+
 const slackToken = process.env.SLACK_API_TOKEN_IRIS || '';
 const slackLogLevel = 'verbose';
 
-const rtm = slackClient.init(slackToken, slackLogLevel);
+const rtm = slackClient.init(slackToken, slackLogLevel, witClient);
 rtm.start();
 
 // this if statement will prevent our express server and test server
