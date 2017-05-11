@@ -8,7 +8,7 @@ module.exports.process = function process(intentData, cb) {
   if (!intentData.location) {
     return cb(new Error('Missing location and time intent'));
   }
-  const location = intentData.location[0].value;
+  const location = intentData.location[0].value.replace(/,.?iris/i, '');
   request.get(`http://localhost:3010/service/${location}`, (err, res) => {
     if(err || res.statusCode !== 200 || !res.body.result) {
       console.log(err);
