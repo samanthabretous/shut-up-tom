@@ -1,9 +1,8 @@
 const request = require('superagent');
 
 module.exports.process = function process(intentData, registry, cb) {
-  console.log('timeIntent', registry);
-  if (intentData.intent[0].value !== 'time') {
-    return cb(new Error(`Expected time event but got ${intentData.intent[0].value}`));
+  if (intentData.intent[0].value !== 'sound') {
+    return cb(new Error(`Expected sound event but got ${intentData.intent[0].value}`));
   }
 
   if (!intentData.location) {
