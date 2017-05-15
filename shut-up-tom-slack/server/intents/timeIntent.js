@@ -5,7 +5,7 @@ module.exports.process = function process(intentData, registry, cb) {
   if (intentData.intent[0].value !== 'time') {
     return cb(new Error(`Expected time event but got ${intentData.intent[0].value}`));
   }
-
+  
   if (!intentData.location) {
     return cb(new Error('Missing location and time intent'));
   }

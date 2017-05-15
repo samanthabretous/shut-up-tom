@@ -13,20 +13,12 @@
   },
   "dependencies": {
     "@slack/client": "^3.9.0",
-    "axios": "^0.16.1",
-    "concurrently": "^3.4.0",
     "dotenv": "^4.0.0",
-    "electron": "^1.6.2",
     "express": "^4.15.2",
-    "ngrok": "^2.2.8",
     "nodemon": "^1.11.0",
     "request": "^2.81.0",
-    "skellington": "^1.2.0",
-    "skellington-logger": "^1.1.0",
     "socket.io": "^2.0.1",
-    "socket.io-client": "^2.0.1",
-    "superagent": "^3.5.2",
-    "superagent-jsonp": "^0.1.1"
+    "superagent": "^3.5.2"
   },
   "main": "app/main.js",
   "scripts": {

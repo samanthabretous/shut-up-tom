@@ -1,15 +1,14 @@
 const request = require('superagent');
-const jsonp = require('superagent-jsonp');
 
 const handleWitResponse = res => res.entities;
-
+/** @summary sends an api call to wit.ai to see what type of intent the user is asking for. Weather? Time? Sound? etc.? The object comes back with a body object with the type of intent.
+*/
 module.exports = (token) => {
   const ask = (message, cb) => {
     request.get('https://api.wit.ai/message')
     .set('Authorization', `Bearer ${token}`)
     .query({ v: '20170510' })
     .query({ q: message })
-    .use(jsonp)
     .end((err, res) => {
       if (err) return cb(err);
       if (res.statusCode !== 200) return cb(`Expected status of 200 but got ${res.statusCode}`);
