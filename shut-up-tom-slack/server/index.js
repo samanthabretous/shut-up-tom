@@ -1,5 +1,6 @@
 // loads environment variables from a .env file
 require('dotenv').config();
+const path = require('path');
 const express = require('express');
 const ServiceRegistry = require('./serviceRegistry');
 
@@ -22,6 +23,14 @@ app.put('/service/:intent/:port', (req, res, next) => {
   serviceRegistry.add(intent, serviceIp, port, io);
   res.json({ result: `${intent} at ${serviceIp}:${port}` });
 });
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../shut-up-tom-electron', 'index.html'));
+});
+
+app.get('/auth', (req, res) =>{
+  res.sendFile(path.join(__dirname, '../../shut-up-tom-electron', '/add_to_slack.html'))
+})
 
 module.exports = {
   server,

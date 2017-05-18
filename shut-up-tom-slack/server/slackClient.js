@@ -2,11 +2,13 @@ const { RtmClient } = require('@slack/client');
 const { CLIENT_EVENTS } = require('@slack/client');
 const { RTM_EVENTS } = require('@slack/client');
 
+let rtm = null;
+
 const handleOnAuthenticated = (rtmStartData) => {
   console.log(`Logged in as ${rtmStartData.self.name} of team ${rtmStartData.team.name}, but not yet connected to a channel`);
 };
 
-const handleOnMessage = (rtm, nlp, registry, message) => {
+const handleOnMessage = (nlp, registry, message) => {
   // only respond to messages that have are intended for Iris
   if(message.text.toLowerCase().includes('iris')) {
     // npl === witClient
@@ -44,10 +46,14 @@ const addAuthentiatedHandler = (rtm, handler) => {
 };
 
 module.exports.init = function slackClient(token, logLevel, nlp, serviceRegistry) {
-  const rtm = new RtmClient(token, { logLevel });
+  rtm = new RtmClient(token, { logLevel });
   addAuthentiatedHandler(rtm, handleOnAuthenticated);
-  rtm.on(RTM_EVENTS.MESSAGE, message => handleOnMessage(rtm, nlp, serviceRegistry, message));
+  rtm.on(RTM_EVENTS.MESSAGE, message => handleOnMessage(nlp, serviceRegistry, message));
   return rtm;
 };
+
+// module.exports.sendMessage = (message) => {
+//   rtm.sendMessage('Hey, Shut up its too loud in here!', )
+// }
 
 module.exports.addAuthentiatedHandler = addAuthentiatedHandler;

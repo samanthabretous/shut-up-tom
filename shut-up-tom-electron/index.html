@@ -4,7 +4,16 @@
     <script charset="utf-8">require('./index')</script>
   </head>
   <body>
-    <div></div>
-    <h1>Hello Steemit</h1>
+    <div >
+      <a
+      class="slack_button"><img src="https://api.slack.com/img/sign_in_with_slack.png" /></a>
+<a href="https://slack.com/oauth/authorize?scope=identity.basic,identity.team,identity.avatar&client_id=169193513941.181075192628"><img alt="Sign in with Slack" height="40" width="172" src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x" /></a>
+    </div>
+    <h1>SHUT UP TOM</h1>
+    <script type="text/javascript" defer>
+      const slack_button = document.querySelector('.slack_button');
+      slack_button.setAttribute('href', `https://slack.com/oauth/authorize?scope=identity.basic&client_id=${process.env.SLACK_SHUT_UP_TOM_CLIENT_ID}`)
+      slack_button.appendChild(a)
+    </script>
   </body>
 </html>

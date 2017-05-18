@@ -6,11 +6,18 @@ const SoundResults = require('./soundResults');
 const app = express();
 const sound = new SoundResults();
 
-setInterval(() => sound.addResult(sound.getLastResult() + 10), 10000);
+setInterval(() => sound.addResult(sound.getLastResult() + 10), 1000);
 
 app.get('/service', (req, res, next) => {
   res.send({ result: sound.getLastResult() })
 });
+
+app.get('/service/new-data', (req, res) => {
+  // only send data back if new infomation is present
+  if (sound.getNewData().updatedAmps) {
+    res.send({ result: sound.getNewData().updatedAmps })
+  }
+})
 
 // board.on("ready", function() {
 //   const sound = new five.Sensor({

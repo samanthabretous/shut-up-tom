@@ -1,5 +1,4 @@
 const request = require('superagent');
-const soundClient = require('./soundClient');
 
 // get the service object related to sound microservice so we have access to the ip address and port
 const findSoundService = (registry, socket) => {
@@ -10,13 +9,14 @@ const findSoundService = (registry, socket) => {
     return soundService;
   } else {
     console.log('finding.....');
-    return setTimeout(() => findSoundService(registry, socket), 250);
+    // recheck registry for infomation about sound service
+    return setTimeout(() => findSoundService(registry, socket), 500);
   }
 }
 
 // constantly as the sound microservice for new infomation
 const soundPolling = (socket, service) => {
-  request.get(`http://${service.ip}:${service.port}/service`, (err, res) => {
+  request.get(`http://${service.ip}:${service.port}/service/new-data`, (err, res) => {
     if(err || res.statusCode !== 200 || !res.body.result) {
       console.log(err);
     }
