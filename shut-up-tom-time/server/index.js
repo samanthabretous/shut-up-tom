@@ -1,3 +1,4 @@
+require('dotenv').config({path: '../../.env'})
 const express = require('express');
 const app = express();
 const request = require('superagent');

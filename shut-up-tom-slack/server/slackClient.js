@@ -8,8 +8,9 @@ const handleOnAuthenticated = (rtmStartData) => {
   console.log(`Logged in as ${rtmStartData.self.name} of team ${rtmStartData.team.name}, but not yet connected to a channel`);
 };
 
-const handleOnMessage = (nlp, registry, message) => {
+const handleOnMessage = (nlp, message) => {
   // only respond to messages that have are intended for Iris
+  console.log(message);
   if(message.text.toLowerCase().includes('iris')) {
     // npl === witClient
     nlp.ask(message.text, (err, res) => {
@@ -25,7 +26,7 @@ const handleOnMessage = (nlp, registry, message) => {
 
         const intent = require(`./intents/${res.intent[0].value}Intent`);
 
-        intent.process(res, registry, (error, response) => {
+        intent.process(res, (error, response) => {
           if (error) {
             console.log(error.message);
             return;
@@ -35,7 +36,7 @@ const handleOnMessage = (nlp, registry, message) => {
       } catch (error) {
         console.log(error);
         console.log(res);
-        rtm.sendMessage("Sorry, I don't know what you are talking about!", message.channel);
+        rtm.sendMessage("Sorry, I don't catch what you are talking about!", message.channel);
       }
     });
   }
@@ -45,10 +46,10 @@ const addAuthentiatedHandler = (rtm, handler) => {
   rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, handler);
 };
 
-module.exports.init = function slackClient(token, logLevel, nlp, serviceRegistry) {
+module.exports.init = function slackClient(token, logLevel, nlp) {
   rtm = new RtmClient(token, { logLevel });
   addAuthentiatedHandler(rtm, handleOnAuthenticated);
-  rtm.on(RTM_EVENTS.MESSAGE, message => handleOnMessage(nlp, serviceRegistry, message));
+  rtm.on(RTM_EVENTS.MESSAGE, message => handleOnMessage(nlp, message));
   return rtm;
 };
 
