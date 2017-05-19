@@ -23,23 +23,12 @@ app.put('/service/:intent/:port', (req, res, next) => {
   res.json({ result: `${intent} at ${serviceIp}:${port}` });
 });
 
-const staticPath = path.join(__dirname, '../../shut-up-tom-electron/dist');
-console.log(staticPath);
-app.use(express.static(staticPath));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(staticPath, 'index.html'));
-});
-
-app.get('/dashboard', (req, res) => {
-  res.sendFile(path.join(staticPath, 'dashboard.html'));
-});
-
-app.get('/auth', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../shut-up-tom-electron', '/add_to_slack.html'));
-});
+app.get('*', (req, res) => {
+  const clientRoutes = serviceRegistry.get('routes');
+  const route = `http://${clientRoutes.ip}:${clientRoutes.port}`
+  console.log(route);
+  res.redirect(route)
+})
 
 module.exports = {
   server,

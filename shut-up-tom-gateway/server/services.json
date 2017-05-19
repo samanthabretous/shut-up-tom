@@ -1,0 +1,12 @@
+[
+  {
+    "name": "helloapi",
+    "host": "helloapi",
+    "port": "2020",
+    "protocol": "http",
+    "rootPath": "api/v1",
+    "middleware": [
+      "SayHello"
+    ]
+  }
+]

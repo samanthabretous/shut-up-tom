@@ -20,5 +20,3 @@ if (!module.parent) {
   })
   server.on('listening', () => console.log(`Listening on port ${server.address().port} in ${app.get('env')} mode`))
 }
-
-module.exports = server;

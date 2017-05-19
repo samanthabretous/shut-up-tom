@@ -1,0 +1,11 @@
+# Local Deployment
+version: "2"
+services:
+  gateway:
+    build: ./shut-up-tom-gateway/
+    ports:
+      - "2020:2020"
+  helloapi:
+    build: ./hello-world-api/
+    ports:
+      - "2020"
