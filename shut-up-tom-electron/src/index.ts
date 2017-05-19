@@ -1,5 +1,5 @@
-const { ipcRenderer } = require('electron');
-const io = require('socket.io-client');
+import { ipcRenderer } from 'electron';
+import io from 'socket.io-client';
 
 const socket = io.connect('http://localhost:2020');
 console.log('socket', socket);
