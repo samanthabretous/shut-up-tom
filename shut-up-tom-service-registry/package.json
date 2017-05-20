@@ -14,7 +14,9 @@
     "body-parser": "^1.17.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
+    "express-handlebars": "^3.0.0",
     "handlebars": "^4.0.8",
+    "morgan": "^1.8.1",
     "nodemon": "^1.11.0",
     "request": "^2.81.0",
     "socket.io": "^2.0.1",
@@ -23,6 +25,6 @@
   "main": "app/main.js",
   "scripts": {
     "build-osx": "electron-packager . Example --platform=darwin --arch=x64 --version=0.36.0 --icon=Icon.icns",
-    "start": "node start.js"
+    "start": "node_modules/.bin/nodemon start.js"
   }
 }

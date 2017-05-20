@@ -1,7 +1,7 @@
 const request = require('superagent');
 
 module.exports.process = function process(intentData, cb) {
-  request.get(`http://localhost:2020/registry/time`, (err, res) => {
+  request.get(`http://localhost:2020/apiregistry/time`, (err, res) => {
     if(err || res.statusCode !== 200) {
       console.log(err);
       return cb(false, 'No service available');

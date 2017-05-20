@@ -16,7 +16,7 @@ const findSoundService = (registry, socket) => {
 
 // constantly as the sound microservice for new infomation
 const soundPolling = (socket, service) => {
-  request.get(`http://${service.ip}:${service.port}/service/new-data`, (err, res) => {
+  request.get(`http://${service.ip}:${service.port}/api/service/new-data`, (err, res) => {
     if(err || res.statusCode !== 200 || !res.body.result) {
       console.log(err);
     }

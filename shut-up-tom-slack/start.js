@@ -22,7 +22,7 @@ if (!module.parent) {
       console.log(`Slack is listening on ${server.address().port} in ${app.get('env')} mode.`);
 
       const announce = () => {
-        request.put(`http://127.0.0.1:2020/service/slack/${server.address().port}`, (err, res) => {
+        request.put(`http://127.0.0.1:2020/api/service/slack/${server.address().port}`, (err, res) => {
           if (err) {
             console.log(err);
             console.log('Error connecting to Shut Up Tom Slack');

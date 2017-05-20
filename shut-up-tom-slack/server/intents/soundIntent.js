@@ -1,8 +1,9 @@
 const request = require('superagent');
 
 module.exports.process = function process(intentData, cb) {
-  request.get(`http://localhost:2020/registry/sound`, (err, res) => {
-    if(err || res.statusCode !== 200) {
+  request.get(`http://localhost:2020/api/registry/sound`, (err, res) => {
+    console.log(res.body);
+    if(err || res.statusCode !== 200 || !res.body ) {
       console.log(err);
       return cb(false, 'No service available');
     }
