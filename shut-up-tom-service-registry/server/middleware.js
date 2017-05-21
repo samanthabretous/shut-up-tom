@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const exphbs  = require('express-handlebars');
 const path = require('path');
 const logger = require('morgan');
@@ -12,6 +13,9 @@ module.exports = (app) => {
   // body-parser
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
+
+  // cookie parser
+  app.use(cookieParser())
 
   app.use(logger('dev'));
 

@@ -1,14 +1,9 @@
 const mongoose = require('mongoose');
 
 const soundSchema = mongoose.Schema({
-  blogTitle: {type: String, required: true},
-  blogAuthor: String,
-  date: { type: Date, default: Date.now },
-  location: String,
-  bodyText: String,
-  categories: [{type: String}],
-  images: String,
-  comments: [Number]
+  sound_level: { type: Number, required: true },
+  readings: [Number],
+  custom_messages: [String]
 });
 
 mongoose.model('Sound', soundSchema)

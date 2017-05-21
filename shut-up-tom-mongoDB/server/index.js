@@ -12,8 +12,8 @@ app.use(bodyParser.json());
 mongoose.connect('mongodb://localhost/shut-up-tom');
 const db = mongoose.connection;
 
-// const models = require('./models');
-const { sound, teamRoutes } = require('./routes');
+const models = require('./models');
+const { soundRoutes, teamRoutes } = require('./routes');
 
 app.use('/api/sound', soundRoutes);
 app.use('/api/team', teamRoutes);

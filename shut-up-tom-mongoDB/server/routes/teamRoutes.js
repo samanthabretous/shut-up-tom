@@ -2,22 +2,30 @@ const router = require('express').Router();
 const Team = require('mongoose').model('Team');
 
 //Response from the home page
-const getTeam = (req, res, next) => {
-  Team.find({}, (err, data) => {
+const getTeam = (req, res) => {
+  Team.findOne({}, (err, data) => {
     res.send(data);
   })
 }
 
 const createTeam = (req, res) =>{
-  console.log(req.body)
-  Team.create(req.body, (err, data) => {
-    if(err) console.log("Error creating ToDo Action")
-    else res.send(data);;
+  // check to see if team already exist
+  Team.findOne({ team_id: req.body.team_id }, (err, team) => {
+    if (team) {
+      res.send(team);
+    } else {
+      // could not find a team so create one
+      Team.create(req.body, (err, data) => {
+        if(err) console.log("Error creating Team Action")
+        else res.send(data);;
+      })
+    }
   })
+
 }
 
-const deleteTeam = (req, res) =>{
-  Team.remove(req.body, (err) =>{
+const deleteTeam = (req, res) => {
+  Team.remove(req.body, (err) => {
     if(err)console.log("Error removing todo")
     else console.log('Delete successful')
   })
