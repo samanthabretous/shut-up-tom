@@ -1,0 +1,63 @@
+:root {
+  --dark-blue: #142553;
+  --nav-width: 10%;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+	background-image:
+    url('../images/background-top.png'),
+    url('../images/background-bottom.png');
+  background-repeat: no-repeat, no-repeat;
+  background-position: top right, bottom;
+  background-color: var(--dark-blue);
+  background-size: auto, 100% auto;
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2, p {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  border: none;
+  background: none;
+}
+
+i {
+  font-size: 3rem;
+}
+
+.logo__container {
+  position: fixed;
+  width: 30%;
+  height: 20%;
+  top: 5%;
+  right: 5%;
+}
+.logo__container img {
+  width: 100%;
+  height: auto;
+}
+
+aside {
+	background-color:white;
+	position: fixed;
+	height: 100%;
+	width: var(--nav-width);
+}
+
+aside a {
+  color:  var(--dark-blue);
+}
+
+main {
+  margin-left: var(--nav-width);
+  width: calc(100% - var(--nav-width));
+  height: 100vh;
+}

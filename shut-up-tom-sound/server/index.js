@@ -8,11 +8,11 @@ const sound = new SoundResults();
 
 setInterval(() => sound.addResult(sound.getLastResult() + 10), 1000);
 
-app.get('/service', (req, res, next) => {
+app.get('/api/service', (req, res, next) => {
   res.send({ result: sound.getLastResult() })
 });
 
-app.get('/service/new-data', (req, res) => {
+app.get('/api/service/new-data', (req, res) => {
   // only send data back if new infomation is present
   if (sound.getNewData().updatedAmps) {
     res.send({ result: sound.getNewData().updatedAmps })

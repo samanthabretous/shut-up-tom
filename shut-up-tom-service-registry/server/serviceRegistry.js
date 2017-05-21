@@ -29,7 +29,6 @@ class ServiceRegistry {
   get(intent) {
     this._cleanup();
     let service = null;
-    console.log(Object.keys(this._services));
     Object.keys(this._services).forEach((key) => {
       if (this._services[key].intent == intent) {
         service = this._services[key];

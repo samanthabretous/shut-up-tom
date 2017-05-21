@@ -1,0 +1,17 @@
+{
+  "name": "shut-up-tom-mongoDB",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/service.js",
+  "scripts": {
+    "start": "node_modules/.bin/nodemon start.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.10.0",
+    "superagent": "^2.3.0"
+  }
+}

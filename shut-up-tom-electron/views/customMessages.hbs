@@ -1,0 +1,14 @@
+{{> sidebar}}
+<main>
+  <h1>Create Custom Messages</h1>
+  <form>
+    <label for="new-message">What would you like me to say</label>
+    <input type="text" name="new-message" value="" />
+    <button>Create Message</button>
+  </form>
+  <ul>
+    {{#each message}}
+    <li>{{message}}</li>
+    {{/each}}
+  </ul>
+</main>

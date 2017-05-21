@@ -5,10 +5,9 @@ const findSoundService = (registry, socket) => {
   const soundService = registry.get('sound');
   if (soundService) {
     soundPolling(socket, soundService)
-    setInterval(() => soundPolling(socket, soundService), 250)
+    setInterval(() => soundPolling(socket, soundService), 1000)
     return soundService;
   } else {
-    console.log('finding.....');
     // recheck registry for infomation about sound service
     return setTimeout(() => findSoundService(registry, socket), 500);
   }

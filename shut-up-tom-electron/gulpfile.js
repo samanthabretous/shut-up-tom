@@ -8,22 +8,25 @@ const gutil = require("gulp-util");
 const glob = require('glob');
 const es = require('event-stream');
 const buffer = require('vinyl-buffer');
+const concat = require('gulp-concat');
+const minifyCSS = require('gulp-minify-css');
 
-gulp.task("copy-css", () => {
-  const paths = {
-    styles: ['css/*.css']
-  };
-  return gulp.src(paths.styles)
-    .pipe(gulp.dest("dist/css"));
+// create task
+gulp.task('css', () => {
+  gulp.src('css/*.css')
+    .pipe(minifyCSS())
+    .pipe(concat('style.min.css'))
+    .pipe(gulp.dest('dist/css'))
 });
 
-gulp.task("default", ["copy-css"], (done) => {
+gulp.task('typescript', (done) => {
   glob('./src/*.ts', (err, files) => {
     if (err) {
       done(err);
     }
 
     const tasks = files.map(entry => {
+      console.log(entry);
       const taskFile = browserify({
         basedir: '.',
         debug: true,
@@ -51,3 +54,9 @@ gulp.task("default", ["copy-css"], (done) => {
     es.merge(tasks).on('end', done);
   });
 });
+
+gulp.task('watch', () => {
+  gulp.watch('css/*.css', ['css']);
+});
+
+gulp.task('default', ['css', 'typescript', 'watch'])
