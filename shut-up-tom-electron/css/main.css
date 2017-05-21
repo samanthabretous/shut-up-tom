@@ -2,10 +2,17 @@
   --dark-blue: #142553;
   --nav-width: 10%;
 }
+@font-face {
+    font-family: cera;
+    src: url(../fonts/CeraGRBold.otf);
+}
 
 * {
   box-sizing: border-box;
+  font-family: cera;
+  color: white;
 }
+
 body {
   height: 100vh;
 	background-image:

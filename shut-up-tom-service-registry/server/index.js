@@ -2,7 +2,6 @@ const path = require('path');
 const express = require('express');
 const applyMiddleware = require('./middleware');
 const ServiceRegistry = require('./serviceRegistry');
-const clientRoutes = require('./clientRoutes');
 
 const serviceRegistry = new ServiceRegistry();
 const app = express();
@@ -32,7 +31,10 @@ app.get('/api/registry/:type', (req, res) => {
 });
 
 // handles all the front end routing
+const clientRoutes = require('./routes/clientRoutes')(serviceRegistry);
+const slackRoutes = require('./routes/slackRoutes')(serviceRegistry);
 app.use('/', clientRoutes);
+app.use('/slack', slackRoutes);
 
 module.exports = {
   server,

@@ -1,0 +1,20 @@
+{
+  "name": "shut-up-tom-electron",
+  "description": "",
+  "main": "main.js",
+  "authors": [
+    "Samantha Bretous <sam@samanthabretous.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/samanthabretous/shut-up-tom",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "fontawesome#^4.7.0"
+  }
+}

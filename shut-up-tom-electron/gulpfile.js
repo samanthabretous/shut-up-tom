@@ -10,6 +10,8 @@ const es = require('event-stream');
 const buffer = require('vinyl-buffer');
 const concat = require('gulp-concat');
 const minifyCSS = require('gulp-minify-css');
+const bower = require('gulp-bower');
+
 
 // create task
 gulp.task('css', () => {
@@ -26,7 +28,6 @@ gulp.task('typescript', (done) => {
     }
 
     const tasks = files.map(entry => {
-      console.log(entry);
       const taskFile = browserify({
         basedir: '.',
         debug: true,
@@ -55,8 +56,17 @@ gulp.task('typescript', (done) => {
   });
 });
 
+gulp.task('bower', () => { 
+  return bower()
+     .pipe(gulp.dest('bower_components' )) 
+});
+gulp.task('icons', ['bower'], () => { 
+  return gulp.src('bower_components/fontawesome/fonts/**.*') 
+    .pipe(gulp.dest('./dist/fonts')); 
+});
+
 gulp.task('watch', () => {
   gulp.watch('css/*.css', ['css']);
 });
 
-gulp.task('default', ['css', 'typescript', 'watch'])
+gulp.task('default', ['icons', 'css', 'typescript', 'watch'])

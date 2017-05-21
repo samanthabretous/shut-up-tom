@@ -9,7 +9,6 @@ const handleOnAuthenticated = (rtmStartData) => {
 };
 
 const handleOnMessage = (nlp, message) => {
-  console.log(message);
   // only respond to messages that have are intended for Iris
   if(message.text.toLowerCase().includes('iris')) {
     // npl === witClient
