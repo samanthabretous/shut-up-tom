@@ -1,5 +1,5 @@
-// const five = require("johnny-five");
-// const board = new five.Board();
+const five = require("johnny-five");
+const board = new five.Board();
 const express = require('express');
 const SoundResults = require('./soundResults');
 
@@ -19,22 +19,22 @@ app.get('/api/service/new-data', (req, res) => {
   }
 })
 
-// board.on("ready", function() {
-//   const sound = new five.Sensor({
-//     pin: "A0",
-//     freq: 250,
-//     threshold: 5,
-//   });
-//   const led = new five.Led(3);
-//   sound.on("data", (value) => {
-//     console.log(value);
-//     // if (sound.scaleTo(0, 10000) > 350) {
-        //  sound.addResult(sound.scaleTo(0,10000))
-//     //   led.on();
-//     // }
-//     // led.off();
-//   })
-// });
+board.on("ready", function() {
+  const sound = new five.Sensor({
+    pin: "A0",
+    freq: 250,
+    threshold: 5,
+  });
+  const led = new five.Led(3);
+  sound.on("data", (value) => {
+    console.log("value",value);
+    // if (sound.scaleTo(0, 10000) > 350) {
+         sound.addResult(sound.scaleTo(0,10000))
+    //   led.on();
+    // }
+    // led.off();
+  })
+});
 
 const server = require('http').createServer(app);
 

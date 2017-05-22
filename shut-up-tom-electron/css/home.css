@@ -1,0 +1,17 @@
+.index {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 25%;
+}
+
+.button__slack {
+  margin-top: 10%;
+}
+
+.index .logo__container-index {
+  position: static;
+  width: 60%;
+  height: auto;
+}

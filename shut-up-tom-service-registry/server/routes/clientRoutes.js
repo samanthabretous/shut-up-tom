@@ -7,7 +7,11 @@ module.exports = (registry) => {
     if (req.cookies.team_id) {
       res.redirect(`/dashboard`);
     } else {
-      res.render('index', { title: 'Shut Up Tom' });
+      res.render('index', {
+        title: 'Shut Up Tom',
+        indexPage: 'logo__container-index',
+        indexBody: 'index'
+      });
     }
   });
 

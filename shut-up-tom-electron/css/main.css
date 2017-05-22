@@ -1,5 +1,6 @@
 :root {
   --dark-blue: #142553;
+  --light-blue: #85D8E2;
   --nav-width: 10%;
 }
 @font-face {
@@ -26,7 +27,7 @@ body {
 	padding: 0;
 }
 
-h1, h2, p {
+h1, h2, h3, p {
   margin: 0;
   padding: 0;
 }
@@ -42,10 +43,10 @@ i {
 
 .logo__container {
   position: fixed;
-  width: 30%;
-  height: 20%;
-  top: 5%;
-  right: 5%;
+  width: 35%;
+  height: 25%;
+  top: 3%;
+  right: 3%;
 }
 .logo__container img {
   width: 100%;
@@ -53,14 +54,14 @@ i {
 }
 
 aside {
-	background-color:white;
+	background-color: var(--light-blue);
 	position: fixed;
 	height: 100%;
 	width: var(--nav-width);
 }
 
 aside a {
-  color:  var(--dark-blue);
+  color: var(--dark-blue);
 }
 
 main {

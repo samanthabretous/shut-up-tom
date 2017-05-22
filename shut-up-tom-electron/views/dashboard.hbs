@@ -5,15 +5,24 @@
     <p>{{team_name}}</p>
   </section>
   <section class="characters">
-    <button class="character character__stress"type="button" name="button">
-      <img src="/images/stress-character.png" alt=""/>
-    </button>
-    <button class="character character__tall" type="button" name="button">
-      <img src="/images/tall-character.png" alt=""/>
-    </button>
-    <button class="character character__horn" type="button" name="button">
-      <img src="/images/horn-character.png" alt=""/>
-    </button>
-  </section>
+    <figure class="character">
+      <img class="character__bubble character__cloud" src="/images/cloud.svg" alt=""/>
+      <button class="character__button character__button-js character__active character__stress" type="button" name="button">
+        <img class="character__monster" src="/images/stress-character.png" alt=""/>
+      </button>
+    </figure>
+    <figure class="character">
+      <img class="character__bubble character__speak" src="/images/speak.svg" alt=""/>
+      <button class="character__button character__button-js character__tall" type="button" name="button">
+        <img class="character__monster" src="/images/tall-character.png" alt=""/>
+      </button>
+    </figure>
+    <figure class="character">
+      <img class="character__bubble character__music" src="/images/music.svg" alt=""/>
+      <button class="character__button character__button-js character__horn" type="button" name="button">
+        <img class="character__monster" src="/images/horn-character.png" alt=""/>
+      </button>
+    </figure>
+    </section>
 </main>
 <script type="text/javascript" src="src/dashboard.bundle.js" defer></script>

@@ -33,6 +33,9 @@ app.on('ready', () => {
     show: false,
     frame: false,
     resizable: false,
+    // this fixed all the errors slack authorize was giving. get rid of ipc.
+    // this a quick work around but need to figure out issue with out this statement
+    webPreferences: { nodeIntegration: false }
   });
 
   // Tell the popup window to load our index.html file
