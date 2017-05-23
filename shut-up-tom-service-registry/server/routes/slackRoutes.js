@@ -29,8 +29,19 @@ module.exports = (registry) => {
     })
   })
   router.post('/command', (req, res) => {
-    console.log(res);
-    res.send('sending data back bitches')
+    const databaseRegistry = registry.get('mongo');
+    console.log(databaseRegistry);
+    console.log(`http://${databaseRegistry.ip}:${databaseRegistry.port}/api/sound/${req.body.team_id}`);
+    request.get(`http://${databaseRegistry.ip}:${databaseRegistry.port}/api/sound/${req.body.team_id}`)
+    .then((success, failure) => {
+      if (failure) res.send("Couldn't find what you are looking for")
+      else if(success.body.noDevice) {
+        res.send('Please hook up your device');
+      } else {
+
+        res.send(`Wow it is ${success.body.decibel}db in here`);
+      }
+    });
   });
 
   return router;

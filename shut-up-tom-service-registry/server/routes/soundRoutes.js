@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const request = require('superagent');
 module.exports = (registry, socket, clients) => {
-  console.log("sound clients",clients);
   router.get('/', (req, res) => {
 
   });
