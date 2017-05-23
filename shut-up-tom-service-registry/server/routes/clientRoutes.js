@@ -14,18 +14,32 @@ module.exports = (registry) => {
       });
     }
   });
-
-  router.get('/dashboard', (req, res) => {
+  const getTeamInfo = (req, res, page) => {
     const databaseService = registry.get('mongo');
 
-    // get team infomation
-    request.get(`http://${databaseService.ip}:${databaseService.port}/api/team/${req.cookies.team_id}`)
-    .then((success, failure) => {
-      res.render('dashboard', {
-        title: 'Shut Up Tom - Dashboard',
-        team_name: req.body.team_name,
-      });
-    })
+    if(databaseService) {
+      request.get(`http://${databaseService.ip}:${databaseService.port}/api/team/${req.cookies.team_id}`)
+      .then((success, failure) => {
+        console.log(success.body);
+        res.render(page, {
+          title: `Shut Up Tom - ${page.toUpperCase()}`,
+          team_name: success.body.team_name,
+          channel: success.body.incoming_webhook.channel,
+        });
+      })
+    } else {
+      return setTimeout(() => getTeamInfo(req, res, page), 500);
+
+
+    }
+
+  };
+  router.get('/dashboard', (req, res) => {
+    getTeamInfo(req, res, 'dashboard');
+  });
+
+  router.get('/info', (req, res) => {
+    getTeamInfo(req, res, 'info');
   });
 
   router.get('/custom-messages', (req, res) => {

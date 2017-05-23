@@ -2,14 +2,17 @@ const router = require('express').Router();
 const Team = require('mongoose').model('Team');
 
 //Response from the home page
-const getTeam = (req, res) => {
-  Team.findOne({}, (err, data) => {
+const getOneTeam = (req, res) => {
+  console.log(req.params.id);
+  Team.findOne({team_id: req.params.id}, (err, data) => {
+    console.log(data);
     res.send(data);
-  })
+  });
 }
 
-const createTeam = (req, res) =>{
+const findOrCreateTeam = (req, res) =>{
   // check to see if team already exist
+  console.log("post");
   Team.findOne({ team_id: req.body.team_id }, (err, team) => {
     if (team) {
       res.send(team);
@@ -44,20 +47,12 @@ const updateTeam = (req, res) => {
   );
 }
 
-const getOneTeam = (req, res) => {
-  Team.findById(req.params.id, (err, data) => {
-    res.send(data);
-  })
-};
-
 //configure router for get and post calls
 router.route('/:id')
   .get(getOneTeam)
 
 router.route('/')
-  .get(getTeam)
-  .post(createTeam)
-  .delete(deleteTeam)
-  .put(updateTeam)
+  .post(findOrCreateTeam)
+
 
 module.exports = router;
