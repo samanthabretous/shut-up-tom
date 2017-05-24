@@ -26,6 +26,14 @@ const soundPolling = (socket, service) => {
 
 module.exports = (app, io, registry) => {
   const clients = new SocketClients;
+  // handles all the front end routing
+  const clientRoutes = require('./routes/clientRoutes')(registry);
+  const slackRoutes = require('./routes/slackRoutes')(registry);
+  const soundRoutes = require('./routes/soundRoutes')(registry, io, clients);
+  app.use('/', clientRoutes);
+  app.use('/slack', slackRoutes);
+  app.use('/sound', soundRoutes);
+
   io.on('connection', (socket) => {
     console.log('socket connected', socket.id);
 
@@ -44,14 +52,6 @@ module.exports = (app, io, registry) => {
 
       console.log('socket disconnected');
     })
-
-    // handles all the front end routing
-    const clientRoutes = require('./routes/clientRoutes')(registry);
-    const slackRoutes = require('./routes/slackRoutes')(registry);
-    const soundRoutes = require('./routes/soundRoutes')(registry, socket, clients);
-    app.use('/', clientRoutes);
-    app.use('/slack', slackRoutes);
-    app.use('/sound', soundRoutes);
   });
 
 };

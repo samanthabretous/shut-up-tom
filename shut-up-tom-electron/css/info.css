@@ -1,0 +1,42 @@
+.info {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+.channel {
+  font-size: 3rem;
+  margin-bottom: 10%;
+}
+
+input {
+  color: black;
+}
+
+output {
+  font-size: 3rem;
+}
+
+button {
+  background: #85D8E2;
+}
+
+.dashboardButton {
+  background: #85D8E2;
+  border-radius: 25px;
+  position: fixed;
+  bottom: 15%;
+  width: 40%;
+  height: 8%;
+}
+
+.dashboardButton a {
+  font-size: 1.5rem;
+  text-decoration: none;
+}

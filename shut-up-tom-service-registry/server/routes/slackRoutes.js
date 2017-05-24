@@ -25,7 +25,7 @@ module.exports = (registry) => {
       // if(failure) {
       //
       // }
-      res.redirect(`/dashboard`)
+      res.redirect(`/info`)
     })
   })
   router.post('/command', (req, res) => {

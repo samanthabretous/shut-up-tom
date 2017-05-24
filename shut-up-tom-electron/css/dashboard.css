@@ -8,8 +8,9 @@
 .reading {
   height: 40%;
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
   padding-bottom: 2%;
 }
 
@@ -42,7 +43,24 @@
 }
 .character__button:hover {
   opacity: 1;
+  animation: showButton 500ms ease-in 0s;
 }
+.character__bubble {
+  opacity: 0;
+}
+.character__bubble-animation {
+  opacity: 1;
+  animation: showButton 500ms ease-in 0s;
+}
+@keyframes showButton {
+  from {
+    opacity: .4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .character__monster {
   height: 100%;
   width: auto;
@@ -85,12 +103,5 @@
 }
 
 .character__active {
-  opacity: 1;
-}
-
-.character__bubble {
-  opacity: 0;
-}
-.character__bubble-animation {
   opacity: 1;
 }

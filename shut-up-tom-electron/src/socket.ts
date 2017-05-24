@@ -9,6 +9,6 @@ if (window.location.pathname === '/dashboard') {
   socket.on('updateData', ({ amps }) => {
     console.log(amps);
     const displayReading = document.querySelector('.reading h3');
-    displayReading.innerText = `${amps} dps`;
+    displayReading.innerText = `${amps} db`;
   });
 }

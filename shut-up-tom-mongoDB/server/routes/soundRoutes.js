@@ -8,45 +8,50 @@ const getDecibel = (req, res) => {
     if(err) console.log("Could not find Team",err);
     else if(!data.sound_id) res.send({ noDevice: true });
     else {
-      Sound.findById(data.sound_id, (err, data) => {
+      Sound.findById(data.sound_id, (err, soundData) => {
         if(err) console.log("Could not find Sound Device", err);
-        const decibel = data.readings[data.readings.length -1] ? data.readings[data.readings.length -1] : 'no readings'
-        res.send({decibel})
+        const decibel = soundData.readings[soundData.readings.length -1] ? soundData.readings[soundData.readings.length -1] : 'no readings'
+        res.send({decibel, soundData})
       })
     }
   })
 }
 
+const randomMessage = (messages) => {
+  return messages[Math.floor(Math.random()*messages.length)];
+};
+
 const updateSoundByTeam = (req, res) => {
-  console.log(req.body.slack);
   Sound.findOneAndUpdate(
-    {team_id: req.body.team_id, device_name: req.body.device_name},
+    {team_id: req.body.teamId, device_name: req.body.deviceName},
     {"$push": { readings: req.body.sound }},
+    {new: true},
     (err, soundData) => {
       if(err) console.log('there was an error updating')
       else {
-        console.log(soundData);
-        Team.findOne({team_id: req.body.team_id}, (err, data) => {
+        Team.findOne({team_id: req.body.teamId}, (err, data) => {
           if(err) console.log('there was an error finding team')
           else {
-            request.post(data.incoming_webhook.url)
-            .send({
-              text : "Hey everyone Shut Up",
-              icon_emoji: ":computer:"
-            })
-            .then((success, failure) => {
-              if(success)console.log("success");
-            })
+            if(req.body.sound > 90) {
+              request.post(data.incoming_webhook.url)
+              .send({
+                text : randomMessage(soundData.custom_messages),
+                icon_emoji: ":computer:"
+              })
+              .then((success, failure) => {
+                if(success)console.log("success");
+              })
+            }
           }
         });
-        res.send({ sound: req.body.sound, teamId: req.body.team_id });
+        res.send({ sound: req.body.sound, teamId: req.body.teamId });
       }
     }
   );
 }
 
 const createNewDevice = (req, res) => {
-  req.body.custom_messages = ["Hey everyone Shut Up!"]
+  req.body.custom_messages = ["Wow, what a wonderful day, but SHUT UP!"]
   Sound.create(req.body, (err, soundData) => {
     if(err) console.log("Error creating new device")
     else {
@@ -63,10 +68,27 @@ const createNewDevice = (req, res) => {
   });
 };
 
+const addMessage = (req, res) => {
+  console.log(req.body.message);
+  Sound.findOneAndUpdate(
+    {team_id: req.body.teamId},
+    {"$push": { custom_messages: req.body.message }},
+    {new: true}, // return update version vs the old
+    (err, soundData) => {
+      if(err) console.log(err);
+      else {
+        res.send({ messages: soundData.custom_messages });
+      }
+    })
+}
+
 //configure router for get and post calls
 router.route('/:id')
   .get(getDecibel)
   .post(createNewDevice)
   .put(updateSoundByTeam)
+
+router.route('/:id/message')
+  .post(addMessage)
 
 module.exports = router;

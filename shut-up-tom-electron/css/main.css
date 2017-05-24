@@ -44,13 +44,13 @@ i {
 .logo__container {
   position: fixed;
   width: 35%;
-  height: 25%;
+  height: auto;
   top: 3%;
   right: 3%;
 }
 .logo__container img {
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 aside {
