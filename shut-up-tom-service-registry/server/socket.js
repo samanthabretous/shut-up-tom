@@ -1,5 +1,5 @@
 const request = require('superagent');
-const SocketClients = require('../socketClients');
+const SocketClients = require('./socketClients');
 
 // get the service object related to sound microservice so we have access to the ip address and port
 const findSoundService = (registry, socket) => {

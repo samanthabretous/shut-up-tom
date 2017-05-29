@@ -6,7 +6,7 @@ const request = require('superagent');
 const getDecibel = (req, res) => {
   Team.findOne({team_id:req.params.id}, (err, data) => {
     if(err) console.log("Could not find Team",err);
-    else if(!data.sound_id) res.send({ noDevice: true });
+    else if(!data && !data.sound_id) res.send({ noDevice: true });
     else {
       Sound.findById(data.sound_id, (err, soundData) => {
         if(err) console.log("Could not find Sound Device", err);
@@ -32,7 +32,7 @@ const updateSoundByTeam = (req, res) => {
         Team.findOne({team_id: req.body.teamId}, (err, data) => {
           if(err) console.log('there was an error finding team')
           else {
-            if(req.body.sound > 90) {
+            if(req.body.sound > 70 && req.body.sound < 85) {
               request.post(data.incoming_webhook.url)
               .send({
                 text : randomMessage(soundData.custom_messages),
@@ -44,6 +44,7 @@ const updateSoundByTeam = (req, res) => {
             }
           }
         });
+        if(req.body.sound < 200)
         res.send({ sound: req.body.sound, teamId: req.body.teamId });
       }
     }

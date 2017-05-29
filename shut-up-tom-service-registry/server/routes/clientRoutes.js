@@ -20,6 +20,7 @@ module.exports = (registry) => {
     if(databaseService) {
       return request.get(`http://${databaseService.ip}:${databaseService.port}/api/team/${req.cookies.team_id}`)
       .then((success, failure) => {
+        console.log(success);
         res.render(page, {
           title: `Shut Up Tom - ${page.toUpperCase()}`,
           team_name: success.body.team_name,

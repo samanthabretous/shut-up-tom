@@ -11,7 +11,10 @@ class ServiceRegistry {
       this._services[key].timestamp = Math.floor(new Date() / 1000);
       this._services[key].ip = ip;
       this._services[key].port = port;
+      this._services[key].host = intent;
       this._services[key].intent = intent;
+      this._services[key].protocol = "http";
+      this._services[key].rootPath = "api/v1";
       console.log(`Added service for intent ${intent} on ${ip}:${port}`);
       this._cleanup();
       return;
@@ -44,6 +47,9 @@ class ServiceRegistry {
         delete this._services[key];
       }
     });
+  }
+  getAllServices() {
+    return this._services;
   }
 }
 

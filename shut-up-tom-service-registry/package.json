@@ -17,11 +17,13 @@
     "express": "^4.15.2",
     "express-handlebars": "^3.0.0",
     "handlebars": "^4.0.8",
+    "http-proxy": "^1.16.2",
     "morgan": "^1.8.1",
     "nodemon": "^1.11.0",
     "request": "^2.81.0",
     "socket.io": "^2.0.1",
-    "superagent": "^3.5.2"
+    "superagent": "^3.5.2",
+    "url": "^0.11.0"
   },
   "main": "app/main.js",
   "scripts": {

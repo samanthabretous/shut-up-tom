@@ -2,10 +2,16 @@
 version: "2"
 services:
   gateway:
-    build: ./shut-up-tom-gateway/
+    build: ./shut-up-tom-service-registry/
     ports:
       - "2020:2020"
+    volumes:
+      - .:/code
   helloapi:
     build: ./hello-world-api/
+    ports:
+      - "2020"
+  slackapi:
+    build: ./shut-up-tom-slackAuth
     ports:
       - "2020"

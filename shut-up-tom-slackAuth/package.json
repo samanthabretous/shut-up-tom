@@ -1,0 +1,20 @@
+{
+  "name": "hello-word-api",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./app"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "debug": "~2.2.0",
+    "express": "^4.14.1",
+    "morgan": "^1.7.0",
+    "superagent": "^3.5.2"
+  },
+  "main": "app.js",
+  "keywords": [],
+  "author": "Samantha Bretous <sam@samanthabretous.com>",
+  "license": "MIT",
+  "description": ""
+}
